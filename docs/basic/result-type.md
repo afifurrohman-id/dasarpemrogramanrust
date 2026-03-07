@@ -1,19 +1,23 @@
 ---
-sidebar_position: 39
-title: A.39. Tipe Data ➜ Result
-sidebar_label: A.39. Tipe Data ➜ Result
+sidebar_position: 40
+title: A.40. Tipe Data ➜ Result
+sidebar_label: A.40. Tipe Data ➜ Result
 ---
 
-Chapter ini membahas tentang tipe data `Result`. Tipe data ini digunakan untuk menampung nilai hasil suatu proses yang isinya adalah bisa sukses (`Ok`) atau error (`Err`).
+Chapter ini membahas tentang tipe data `Result`, yaitu tipe data yang digunakan untuk menampung nilai yang isinya bisa berupa penanda operasi sukses (`Ok`) dan data, atau error (`Err`) beserta keterangan errornya.
 
-Tipe data `Result` biasa digunakan untuk menampung hasil eksekusi proses dan error handling.
+Rust menyediakan panic-level error, tapi penggunaannya untuk menandai operasi error sangat tidak dianjurkan. Selain itu, Rust tidak mengenal konsep *exception*.
 
-## A.39.1. Konsep `Result`
+Tipe `Result` ini adalah tipe yang paling umum dan direkomendasikan untuk digunakan dalam penanganan error.
+
+> Lebih detailnya mengenai penanganan error dibahas di chapter [Error ➜ Recoverable Error & Error Handling](/basic/recoverable-error-handling)
+
+## A.40.1. Konsep `Result`
 
 Tipe data `Result` adalah enum dengan isi 2 buah enum value:
 
 - `Result::Ok<T>` (atau `Ok<T>`), digunakan untuk menandai bahwa data isinya adalah kabar baik (oke / mantab / jos / sukses).
-- `Result::Err<E>` (atau `Err<E>`), digunakan untuk menandai bawah data berisi kabar buruk.
+- `Result::Err<E>` (atau `Err<E>`), digunakan untuk menandai bawah data berisi kabar buruk (error).
 
 > - `T` dan `E` merupakan parameter generic. Lebih jelasnya mengenai generic dibahas pada chapter [Generics](/basic/generics).
 
@@ -60,7 +64,7 @@ Output program di atas saat di-run:
 
 ![Result type](img/result-type-1.png)
 
-## A.39.2. Pattern matching pada tipe `Result`
+## A.40.2. Pattern matching pada tipe `Result`
 
 Dalam penerapannya, ketika ada data bertipe `Result` artinya data tersebut berpotensi untuk berisi nilai `Err<E>` atau `Ok<T>`, pasti antara 2 nilai tersebut.
 
@@ -140,7 +144,7 @@ Dengan penerapan pattern matching seperti di atas, maka variabel `result` akan s
 
 > Lebih jelasnya mengenai pattern matching dibahas pada chapter [Pattern Matching](/basic/pattern-matching)
 
-## A.39.3. Method tipe data `Result`
+## A.40.3. Method tipe data `Result`
 
 ### ◉ Method `is_ok` & `unwrap`
 
@@ -237,11 +241,52 @@ Closure harus dalam notasi `FnOnce(E) -> T` yang mana `T` pada konteks ini adala
 
 > Lebih jelasnya mengenai closure dibahas pada chapter [Closures](/basic/closures).
 
-## A.39.4. Error handling tipe `Result`
+## A.40.4. Operator `?` pada tipe `Result`
 
-Tipe data `Result<T, E>` banyak digunakan pada fungsi milik Rust standard library, dan kita selaku programmer pastinya juga akan menggunakannya dalam *real life* project.
+Tipe data `Result` bisa digunakan pada operator `?`. Penjelasannya ada di chapter terpisah di [Operator ?](/basic/operator-tanda-tanya).
 
-Tipe ini dipakai salah satunya untuk manajemen error. Lebih jelasnya mengenai topik tersebut dibahas pada chapter [Error Handling & Panic](#/wip/error-handling-panic)
+## A.40.5. Error handling
+
+Tipe data `Result<T, E>` banyak digunakan pada fungsi-fungsi yang disediakan Rust standard library, selain itu tipe tersebut juga akan sering kita gunakan dalam *real life* project.
+
+Tipe ini dimanfaatkan untuk error handling di Rust. Lebih jelasnya mengenai topik tersebut dibahas pada chapter [Error ➜ Recoverable Error & Error Handling](/basic/recoverable-error-handling).
+
+## A.40.6. Tipe `Result<(), E>`
+
+Di atas kita telah mempelajari dan mempraktikkan fungsi `divider()` yang fungsi tersebut mengembalikan 2 informasi, yaitu:
+
+- `T` berisi nilai hasil pembagian
+- `E` berisi error saat operasi pembagian
+
+Bentuk lain penerapan tipe data `Result` adalah dengan menggunakan notasi `Result<T, E>` dengan `T` diisi tipe data `()`. Tipe ini cukup sering digunakan pada fungsi yang memiliki potensi error tapi kita hanya butuh informasi errornya saja tanpa nilai balik lainnya.
+
+Sebagai contoh, pada kode berikut dibuat fungsi baru bernama `divide_and_print()`. Dalam fungsi tersebut, operasi pembagian dilakukan. Jika sukses, nilainya langsung di-print; jika error, nilai errornya dikembalikan. Dari sini terlihat bahwa kita tidak membutuhkan fungsi tersebut untuk mengembalikan informasi selain error.
+
+```rust
+fn divide_and_print(a: f64, b: f64) -> Result<(), MathError> {
+    let res = divider(a, b);
+    match res {
+        Err(m) => {
+            println!("ERROR! {:?}", m);
+            Err(m)
+        },
+        Ok(n) => {
+            println!("result: {}", n);
+            Ok(())
+        },
+    }
+}
+
+fn main() {
+    let result = divide_and_print(10.0, 1.0);
+}
+```
+
+Pada pemanggilan fungsi `Ok()` gunakan nilai `()` untuk memenuhi kriteria tipe data `Result<(), MathError>`.
+
+## A.40.7. Tipe `Result<T>`
+
+Notasi tipe data `Result` bawaan Rust Standard Library adalah `Result<T, E>`. Namun, pada pengembangan software yang melibatkan banyak sekali library/dependency, adakalanya pembaca akan menemui notasi tipe data `Result<T>`. Notasi tersebut dibuat oleh pengembang library/dependency untuk memperingkas tipe `Result<T, SomeErrorType>`. Jadi tidak usah bingung.
 
 ---
 
@@ -260,10 +305,8 @@ Tipe ini dipakai salah satunya untuk manajemen error. Lebih jelasnya mengenai to
 - [Generics](/basic/generics)
 - [Pattern Matching](/basic/pattern-matching)
 - [Closures](/basic/closures)
-
-### ◉ Work in progress
-
-- Operator `?`
+- [Operator ?](/basic/operator-tanda-tanya)
+- [Error ➜ Recoverable Error & Error Handling](/basic/recoverable-error-handling)
 
 ### ◉ Referensi
 

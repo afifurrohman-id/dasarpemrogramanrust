@@ -1,12 +1,12 @@
 ---
-sidebar_position: 38
-title: A.38. Tipe Data ➜ Option
-sidebar_label: A.38. Tipe Data ➜ Option
+sidebar_position: 39
+title: A.39. Tipe Data ➜ Option
+sidebar_label: A.39. Tipe Data ➜ Option
 ---
 
 `Option` adalah salah satu tipe data penting pada Rust programming, digunakan untuk menampung data yang isinya bisa berpotensi kosong (`None`). Chapter ini membahas tentang tipe data tersebut.
 
-## A.38.1. Konsep `Option`
+## A.39.1. Konsep `Option`
 
 Tipe data `Option` adalah enum dengan isi 2 buah enum value:
 
@@ -52,7 +52,7 @@ Output program di atas saat di-run:
 
 ![Option type](img/option-type-1.png)
 
-## A.38.2. Pattern matching pada tipe `Option`
+## A.39.2. Pattern matching pada tipe `Option`
 
 Dalam penerapannya, ketika ada data bertipe `Option` artinya data tersebut berpotensi untuk berisi nilai `None` atau `Some<T>`, pasti antara 2 nilai tersebut.
 
@@ -136,7 +136,7 @@ Dengan penerapan pattern matching seperti di atas, maka variabel `result` akan s
 
 > Lebih jelasnya mengenai pattern matching dibahas pada chapter [Pattern Matching](/basic/pattern-matching)
 
-## A.38.3. Method tipe data `Option`
+## A.39.3. Method tipe data `Option`
 
 ### ◉ Method `unwrap`
 
@@ -224,6 +224,10 @@ Closure harus dalam notasi `FnOnce() -> T` yang mana `T` pada konteks ini adalah
 >
 > Lebih jelasnya mengenai closure dibahas pada chapter [Closures](/basic/closures).
 
+## A.38.4. Operator `?` pada tipe `Option`
+
+Tipe data `Option` bisa digunakan pada operator `?`. Penjelasannya ada di chapter terpisah di [Operator ?](/basic/operator-tanda-tanya).
+
 ---
 
 ## Catatan chapter 📑
@@ -241,6 +245,7 @@ Closure harus dalam notasi `FnOnce() -> T` yang mana `T` pada konteks ini adalah
 - [Generics](/basic/generics)
 - [Pattern Matching](/basic/pattern-matching)
 - [Closures](/basic/closures)
+- [Operator ?](/basic/operator-tanda-tanya)
 
 ### ◉ Referensi
 

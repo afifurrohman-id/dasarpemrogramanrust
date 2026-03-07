@@ -1,12 +1,12 @@
 ---
-sidebar_position: 48
-title: A.48. Trait ➜ Iterator
-sidebar_label: A.48. Trait ➜ Iterator
+sidebar_position: 50
+title: A.50. Trait ➜ Iterator
+sidebar_label: A.50. Trait ➜ Iterator
 ---
 
 Iterator adalah salah satu trait dan tipe data custom penting pada Rust programming, gunanya untuk iterasi data. Di chapter ini kita akan mempelajarinya beserta beberapa module item lainnya yang masih relevan dengan topik Iterator.
 
-## A.48.1. `Iterator` & `IntoIterator`
+## A.50.1. `Iterator` & `IntoIterator`
 
 `Iterator` adalah sebuah nama yang dipakai sebagai nama module item dalam **Rust Standard Library** maupun **Rust Core Library**, digunakan untuk iterasi data dan operasi lain yang berhubungan dengannya.
 
@@ -100,7 +100,7 @@ Bisa dilihat pada contoh di atas, data slice diambil objek Iterator-nya mengguna
 
 ![Trait iterator](img/trait-iterator-1.png)
 
-## A.48.2. Pemanfaatan tipe data `Iterator`
+## A.50.2. Pemanfaatan tipe data `Iterator`
 
 Tipe data `Iterator` memiliki cukup banyak method untuk keperluan operasi data iterator, contohnya seperti `for_each`, `map`, `filter`, dan lainnya.
 
@@ -151,7 +151,7 @@ println!("{numbers:?}");
 
 Program di atas melakukan beberapa hal:
 
-1. Data `data_vec` yang merupakan koleksi string di-konversi menjadi object `Iterator` menggunakan method `iter`.
+1. Data `data_vec` yang merupakan koleksi string dikonversi menjadi object `Iterator` menggunakan method `iter`.
 
 1. Kemudian method `map` diakses. Setiap elemen `data_vec` di-iterasi, kemudian dikonversi dari `String` ke `i32`, lalu dijadikan *replacement* data elemen tersebut. Jika proses konversi gagal, maka angka `0` digunakan sebagai data element tersebut.
     - Sampai sini, data yang sebelumnya `["1", "2", "3", "4", "a"]` sekarang menjadi `[1, 2, 3, 4, 0]`.
@@ -168,7 +168,7 @@ Hasilnya ketika di run:
 
 ![Trait iterator](img/trait-iterator-3.png)
 
-## A.48.3. Method tipe data `Iterator`
+## A.50.3. Method tipe data `Iterator`
 
 ### ◉ Method `iter`, `iter_mut`, `into_iter`
 
@@ -256,7 +256,7 @@ println!("{:?}", result2);
 // [1, 2, 3, 4]
 ```
 
-Contoh lainnya bisa dilihat pada *section* [A.48.2. Pemanfaatan tipe data `Iterator`](/basic/trait-iterator#a482-pemanfaatan-tipe-data-iterator), di situ terdapat operasi mapping data slice numerik ke bentuk yang sama tapi nilai setiap element adalah kuadrat, dan ke bentuk lain dengan tipe data berbeda.
+Contoh lainnya bisa dilihat pada *section* [A.50.2. Pemanfaatan tipe data `Iterator`](/basic/trait-iterator#a482-pemanfaatan-tipe-data-iterator), di situ terdapat operasi mapping data slice numerik ke bentuk yang sama tapi nilai setiap element adalah kuadrat, dan ke bentuk lain dengan tipe data berbeda.
 
 ### ◉ Method `rev`
 
@@ -518,7 +518,7 @@ println!("max: {max}");
 // max: 4
 ```
 
-## A.48.4. Method lainnya
+## A.50.4. Method lainnya
 
 ### ◉ Method `sort` milik `Vec<T>`
 
